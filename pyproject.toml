@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "entities-extraction-web-scrape"
+version = "0.1.0"
+description = "a FastAPI server that allows you to scrape any website using  natural language"
+authors = ["Hai Nghiem"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "entities_extraction_web_scrape"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.247"
+fastapi = "*"
+openai = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
