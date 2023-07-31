@@ -14,6 +14,7 @@ fastapi = "*"
 openai = "*"
 beautifulsoup4 = "*"
 python-dotenv = "*"
+playwright = "*"
 
 
 [build-system]

@@ -1,5 +1,9 @@
+import asyncio
+import pprint
+
 import requests
 from bs4 import BeautifulSoup
+from playwright.async_api import async_playwright
 
 
 def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
@@ -88,15 +92,30 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
     return results_formatted
 
 
+async def ascrape_playwright(url) -> str:
+    results = ""
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        try:
+            page = await browser.new_page()
+            await page.goto(url)
+
+            page_source = await page.content()
+
+            results = remove_unessesary_lines(extract_tags(remove_unwanted_tags(
+                page_source), ["p", "li", "div", "a"]))
+        except Exception as e:
+            results = f"Error: {e}"
+        await browser.close()
+    return results
+
+
 # TESTING
 if __name__ == "__main__":
     url = "https://www.patagonia.ca/shop/new-arrivals"
 
-    results = remove_unwanted_tags(scrape_by_url_raw(url))
+    async def scrape_playwright():
+        results = await ascrape_playwright(url)
+        print(results)
 
-    results_formatted = remove_unessesary_lines(
-        extract_tags(remove_unwanted_tags(results)))
-
-    print(results_formatted)
-
-    save_to_txt(results_formatted, "scraped_content.txt")
+    pprint.pprint(asyncio.run(scrape_playwright()))
