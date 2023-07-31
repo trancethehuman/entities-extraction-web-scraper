@@ -19,7 +19,3 @@ if __name__ == "__main__":
                                 content=html_content_fits_context_window_llm)
 
     pprint.pprint(extracted_content)
-
-    with open("results.txt", 'w', encoding='utf-8') as file:
-        file.write("[{}]".format(", ".join(str(item)
-                   for item in extracted_content)))
