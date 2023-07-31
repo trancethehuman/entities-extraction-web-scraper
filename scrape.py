@@ -71,8 +71,8 @@ def remove_unessesary_lines(content):
     deduped_lines = [line for line in non_empty_lines if not (
         line in seen or seen.add(line))]
 
-    # Join the cleaned lines
-    cleaned_content = "\n\n".join(deduped_lines)
+    # Join the cleaned lines without any separators (remove newlines)
+    cleaned_content = "".join(deduped_lines)
 
     return cleaned_content
 
@@ -90,7 +90,7 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
 
 # TESTING
 if __name__ == "__main__":
-    url = "https://www.uploadvr.com"
+    url = "https://www.patagonia.ca/shop/new-arrivals"
 
     results = remove_unwanted_tags(scrape_by_url_raw(url))
 
