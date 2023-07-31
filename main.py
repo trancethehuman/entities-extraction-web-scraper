@@ -26,6 +26,6 @@ if __name__ == "__main__":
         pprint.pprint(extracted_content)
 
     asyncio.run(scrape_with_playwright(
-        url=wsj_url,
-        schema=ecommerce_schema
+        url=cnn_url,
+        schema_pydantic=SchemaNewsWebsites
     ))
