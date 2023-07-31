@@ -6,6 +6,8 @@ from langchain.chains import (create_extraction_chain,
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 
+load_dotenv()
+
 openai_api_key = os.getenv('OPENAI_API_KEY')
 
 llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613",
@@ -13,11 +15,11 @@ llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613",
 
 schema = {
     "properties": {
-        "article_name": {"type": "string"},
+        "item_name": {"type": "string"},
         "url": {"type": "string"},
-        "author": {"type": "string"}
+        "price": {"type": "string"},
     },
-    "required": ["article_name", "url", "author"],
+    "required": ["item_name", "url", "price"],
 }
 
 extractor_chain = create_extraction_chain(schema, llm)

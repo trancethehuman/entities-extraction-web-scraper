@@ -83,6 +83,8 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
     results_formatted = remove_unessesary_lines(
         extract_tags(remove_unwanted_tags(results), tags=tags))
 
+    save_to_txt(results_formatted, "scraped_content.txt")
+
     return results_formatted
 
 
