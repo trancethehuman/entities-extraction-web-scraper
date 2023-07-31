@@ -1,5 +1,12 @@
-# The Scraper API Server
+# Scrape the Web with entities extraction using OpenAI Function
 
 ## What is this?
 
-This API server lets you scrape any website and respond with specified data.
+This codebase allows you to scrape any website and extract relevant data points easily.
+
+## Additional Information
+
+Some sites don't allow scraping
+
+- Bestbuy
+- Amazon
