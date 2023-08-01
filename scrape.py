@@ -95,6 +95,7 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
 
 
 async def ascrape_playwright(url) -> str:
+    print("Started scraping...")
     results = ""
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -106,6 +107,7 @@ async def ascrape_playwright(url) -> str:
 
             results = remove_unessesary_lines(extract_tags(remove_unwanted_tags(
                 page_source), ["p", "li", "div", "a"]))
+            print("Content scraped")
         except Exception as e:
             results = f"Error: {e}"
         await browser.close()
