@@ -80,6 +80,8 @@ def remove_unessesary_lines(content):
 
     return cleaned_content
 
+# This doesn't work well for JavaScript-heavy websites
+
 
 def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
     results = remove_unwanted_tags(scrape_by_url_raw(url))
@@ -87,7 +89,7 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
     results_formatted = remove_unessesary_lines(
         extract_tags(remove_unwanted_tags(results), tags=tags))
 
-    save_to_txt(results_formatted, "scraped_content.txt")
+    # save_to_txt(results_formatted, "scraped_content.txt")
 
     return results_formatted
 

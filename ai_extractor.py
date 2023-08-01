@@ -15,6 +15,10 @@ llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613",
 
 def extract(content: str, **kwargs):
     if 'schema_pydantic' in kwargs:
-        return create_extraction_chain_pydantic(pydantic_schema=kwargs["schema_pydantic"], llm=llm).run(content)
+        response = create_extraction_chain_pydantic(
+            pydantic_schema=kwargs["schema_pydantic"], llm=llm).run(content)
+        response_as_dict = [item.dict() for item in response]
+
+        return response_as_dict
     else:
         return create_extraction_chain(schema=kwargs["schema"], llm=llm).run(content)
