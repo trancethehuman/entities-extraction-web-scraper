@@ -3,14 +3,20 @@
 ## What is this?
 
 This codebase allows you to scrape any website and extract relevant data points easily.
+Create a schema in `schemas.py`, pick a url, and use them with `scrape_with_playwright()` in `main.py` to start scraping.
 
-Add onto this a FastAPI server to serve this as an API endpoint for ease of use.
+```python
+asyncio.run(scrape_with_playwright(
+        url="https://www.bbc.com",
+        schema_pydantic=SchemaNewsWebsites
+    ))
+```
 
 ## Setup
 
 ### Create a new Python virtual environment
 
-`python -m venv virtual-env` (Mac)
+`python -m venv virtual-env` or `python3 -m venv virtual-env` (Mac)
 
 `py -m venv virtual-env` (Windows 11)
 
@@ -40,11 +46,12 @@ OPENAI_API_KEY=XXXXXX
 
 ### Run locally
 
+```bash
 python main.py
+```
 
 ## Additional Information
 
-Some sites don't allow scraping
+- Add onto this a FastAPI server to serve this as an API endpoint for ease of use.
 
-- Bestbuy
-- Amazon
+- Use caution when scraping. Don't do anything I wouldn't do (illegal)
