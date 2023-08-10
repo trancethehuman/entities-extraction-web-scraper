@@ -1,6 +1,4 @@
-from typing import List, Optional
-
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 ecommerce_schema = {
     "properties": {
@@ -13,6 +11,5 @@ ecommerce_schema = {
 
 
 class SchemaNewsWebsites(BaseModel):
-    news_article_title: str
-    news_article_summary: str
-    news_article_extra_info: str
+    news_headline: str
+    news_short_summary: str

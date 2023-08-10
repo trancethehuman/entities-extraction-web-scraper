@@ -83,7 +83,7 @@ def remove_unessesary_lines(content):
 # This doesn't work well for JavaScript-heavy websites
 
 
-def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
+def scrape(url: str, tags):
     results = remove_unwanted_tags(scrape_by_url_raw(url))
 
     results_formatted = remove_unessesary_lines(
@@ -94,7 +94,7 @@ def scrape(url: str, tags: list[str] = ["p", "li", "div", "a"]):
     return results_formatted
 
 
-async def ascrape_playwright(url) -> str:
+async def ascrape_playwright(url, tags: list[str] = ["h1", "h2", "h3", "span"]) -> str:
     print("Started scraping...")
     results = ""
     async with async_playwright() as p:
@@ -106,7 +106,7 @@ async def ascrape_playwright(url) -> str:
             page_source = await page.content()
 
             results = remove_unessesary_lines(extract_tags(remove_unwanted_tags(
-                page_source), ["p", "li", "div", "a"]))
+                page_source), tags))
             print("Content scraped")
         except Exception as e:
             results = f"Error: {e}"
