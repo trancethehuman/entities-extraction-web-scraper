@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This codebase allows you to scrape any website and extract relevant data points easily.
+This codebase allows you to scrape any website and extract relevant data points easily using [OpenAI Functions](https://openai.com/blog/function-calling-and-other-api-updates) and [LangChain](https://python.langchain.com/docs/get_started/introduction).
 Create a schema in `schemas.py`, pick a url, and use them with `scrape_with_playwright()` in `main.py` to start scraping.
 
 Tip: each website has the bulk of content either in `<p>`, `<span>` or `<h>` tags. For best performance, choose a combination of tags that work for you.
