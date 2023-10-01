@@ -29,29 +29,29 @@ Tip: each website has the bulk of content either in `<p>`, `<span>` or `<h>` tag
 
 ## Setup
 
-### Create a new Python virtual environment
+### 1. Create a new Python virtual environment
 
 `python -m venv virtual-env` or `python3 -m venv virtual-env` (Mac)
 
 `py -m venv virtual-env` (Windows 11)
 
-### Activate virtual environment
+### 2. Activate virtual environment
 
 `.\virtual-env\Scripts\activate` (Windows)
 
 `source virtual-env/bin/activate` (Mac)
 
-### Install dependencies
+### 3. Install dependencies using Poetry
 
 Run `poetry install --sync` or `poetry install`
 
-### Install playwright (for SPAs or JS-heavy websites that require a browser to be opened)
+### 4. Install playwright
 
 ```bash
 playwright install
 ```
 
-### Create a new `.env` file
+### 5. Create a new `.env` file to store OpenAI's API key
 
 ```text
 OPENAI_API_KEY=XXXXXX
