@@ -70,3 +70,5 @@ python main.py
 - Add onto this a FastAPI server to serve this as an API endpoint for ease of use.
 
 - Use caution when scraping. Don't do anything I wouldn't do (illegal)
+
+- P.S I've added this functionality to LangChain [in this PR](https://github.com/langchain-ai/langchain/pull/8732). You can read [the official docs here.](https://python.langchain.com/docs/use_cases/web_scraping#quickstart)
