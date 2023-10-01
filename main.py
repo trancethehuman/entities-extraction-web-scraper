@@ -21,8 +21,6 @@ if __name__ == "__main__":
 
         print("Extracting content with LLM")
 
-        # print(html_content)
-
         html_content_fits_context_window_llm = html_content[:token_limit]
 
         extracted_content = extract(**kwargs,

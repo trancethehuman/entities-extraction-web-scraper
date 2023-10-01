@@ -7,13 +7,25 @@ Create a schema in `schemas.py`, pick a url, and use them with `scrape_with_play
 
 Tip: each website has the bulk of content either in `<p>`, `<span>` or `<h>` tags. For best performance, choose a combination of tags that work for you.
 
-```python
-asyncio.run(scrape_with_playwright(
-        url="https://www.bbc.com",
-        tags=["span"],
-        schema_pydantic=SchemaNewsWebsites
-    ))
-```
+### Example
+
+1. Define the schema of the website you want to scrape in `schemas.py` (Pydantic class or dictionary are both fine):
+
+   ```python
+   class SchemaNewsWebsites(BaseModel):
+       news_headline: str
+       news_short_summary: str
+   ```
+
+2. To start scraping, in `main.py`, run something like this:
+
+   ```python
+   asyncio.run(scrape_with_playwright(
+           url="https://www.bbc.com",
+           tags=["span"],
+           schema_pydantic=SchemaNewsWebsites
+       ))
+   ```
 
 ## Setup
 

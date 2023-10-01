@@ -1,12 +1,14 @@
 import asyncio
 import pprint
 
-import requests
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 
 
 def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
+    """
+    This removes unwanted HTML tags from the given HTML content.
+    """
     soup = BeautifulSoup(html_content, 'html.parser')
 
     for tag in unwanted_tags:
@@ -17,6 +19,11 @@ def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
 
 
 def extract_tags(html_content, tags: list[str]):
+    """
+    This takes in HTML content and a list of tags, and returns a string
+    containing the text content of all elements with those tags, along with their href attribute if the
+    tag is an "a" tag.
+    """
     soup = BeautifulSoup(html_content, 'html.parser')
     text_parts = []
 
@@ -34,30 +41,6 @@ def extract_tags(html_content, tags: list[str]):
                 text_parts.append(element.get_text())
 
     return ' '.join(text_parts)
-
-
-def scrape_by_url_raw(url: str):
-    """
-    Scrape the main content text from a given Wikipedia URL.
-    """
-
-    response = requests.get(url)
-    response.raise_for_status()
-
-    soup = BeautifulSoup(response.content, 'html.parser')
-
-    # Extract all the text content. This approach is generalized and
-    # might not always yield perfect results for all websites.
-    content_text = soup.get_text()
-
-    html_content = response.text
-
-    return html_content
-
-
-def save_to_txt(content, filename):
-    with open(filename, 'w', encoding='utf-8') as file:
-        file.write(content)
 
 
 def remove_unessesary_lines(content):
@@ -80,21 +63,13 @@ def remove_unessesary_lines(content):
 
     return cleaned_content
 
-# This doesn't work well for JavaScript-heavy websites
-
-
-def scrape(url: str, tags):
-    results = remove_unwanted_tags(scrape_by_url_raw(url))
-
-    results_formatted = remove_unessesary_lines(
-        extract_tags(remove_unwanted_tags(results), tags=tags))
-
-    # save_to_txt(results_formatted, "scraped_content.txt")
-
-    return results_formatted
-
 
 async def ascrape_playwright(url, tags: list[str] = ["h1", "h2", "h3", "span"]) -> str:
+    """
+    An asynchronous Python function that uses Playwright to scrape
+    content from a given URL, extracting specified HTML tags and removing unwanted tags and unnecessary
+    lines.
+    """
     print("Started scraping...")
     results = ""
     async with async_playwright() as p:
